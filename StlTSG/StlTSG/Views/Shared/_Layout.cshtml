@@ -81,7 +81,7 @@
                 </li>
             }
             <li><hr></li>
-            @if (!User.Identity.IsAuthenticated)
+            @*@if (!User.Identity.IsAuthenticated)
             {
                 <li>
                     <a href="#login" onclick=$("#menu-close").click(); data-toggle="modal">Login</a>
@@ -93,13 +93,13 @@
             else
             {
                 @Html.Partial("LogOffView", new ViewDataDictionary());
-            }
+            }*@
         </ul>
     </nav>
 
     <div class="container-fluid body-content">
-        @Html.Partial("LoginView", new ViewDataDictionary())
-        @Html.Partial("RegisterView", new ViewDataDictionary())
+        @*@Html.Partial("LoginView", new ViewDataDictionary())
+        @Html.Partial("RegisterView", new ViewDataDictionary())*@
         @RenderBody()
     </div>
 

@@ -116,6 +116,18 @@ input {
     background-color: rgba(0,0,0,0.7);
 }
 
+.btn-purple {
+    border-color: #FFF;
+    color: #FFF;
+    background-color: #400080;
+}
+
+.btn-purple:hover {
+    border-color: #c4c5c6;
+    color: #c4c5c6;
+    background-color: #400080;
+}
+
 .btn-light {
     border-radius: 0;
     color: #333;

@@ -10,7 +10,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="blue bold">CONTACT US</h4>
+                    <h4 class="purple bold">CONTACT US</h4>
                 </div>
                 <div class="modal-body">
                     @using (Html.BeginForm("ContactUs", "Home", FormMethod.Post))
@@ -21,7 +21,7 @@
                                 @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @id = "cEmail", @type = "email", @required = "required" })
                                 @Html.TextAreaFor(m => m.Issue, new { @class = "form-control pad-bottom", @placeholder = "Message", @id = "cIssue", @rows = "2", @type = "text", @required = "required" })
                                 <div class="help-block with-errors"></div>
-                                <button type="submit" class="btn btn-primary" value="Open Form">Submit</button>
+                                <button type="submit" class="btn btn-purple" value="Open Form">Submit</button>
                                 <button class="btn btn-default" data-dismiss="modal">Cancel</button>
                             </div>
                         </div>
@@ -35,7 +35,7 @@
     <header id="top" class="header">
         <div class="text-vertical-center">
             <div class="row">
-                <video poster="" id="bgvid" playsinline autoplay muted loop>
+                <video id="bgvid" playsinline autoplay muted loop>
                     <source src="~/Images/bgvid1.mp4" type="video/mp4">
                 </video>
                 <div class="col-md-4">
@@ -130,7 +130,7 @@
     </section>
 
     <!-- Callout -->
-    <aside class="callout">
+    <aside class="callout">bg-purple
         <div class="text-vertical-center">
         </div>
     </aside>
@@ -148,7 +148,7 @@
                             @Html.HiddenFor(m => m.Institution, new { @id = "chosenDInstitution", @required = "required" })
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @id = "dEmail", @type = "email", @required = "required" })
                             @Html.TextAreaFor(m => m.Issue, new { @class = "form-control", @placeholder = "Describe your issue...", @id = "dMessage", @rows = "5", @required = "required" })
-                            <button class="btn btn-primary" type="submit" onclick="ValidateDRequestForm();" id="dSubmitButton">Submit</button>
+                            <button class="btn btn-purple" type="submit" onclick="ValidateDRequestForm();" id="dSubmitButton">Submit</button>
                             <button class="btn btn-default" type="button" onclick="ClearDiagnostic();" id="dClearButton">Clear</button>
                         </div>
                     }
@@ -175,7 +175,7 @@
                             @Html.TextBoxFor(m => m.DeviceBrand, new { @class = "form-control", @placeholder = "Computer brand (ASUS, HP, Dell, etc.)", @id = "aBrand", @required = "required" })
                             @Html.TextBoxFor(m => m.DeviceModel, new { @class = "form-control", @placeholder = "Computer model (Bottom of computer or under battery)", @id = "aModel", @required = "required" })
                             @Html.TextAreaFor(m => m.Issue, new { @class = "form-control", @placeholder = "Describe your issue...", @id = "aMessage", @rows = "5", @required = "required" })
-                            <button class="btn btn-primary" type="submit" onclick="ValidateARequestForm();" id="aSubmitButton">Submit</button>
+                            <button class="btn btn-purple" type="submit" onclick="ValidateARequestForm();" id="aSubmitButton">Submit</button>
                             <button class="btn btn-default" type="button" onclick="ClearAppointment();" id="aClearButton">Clear</button>
                         </div>
                     }
@@ -195,7 +195,7 @@
                         <div class="form-group">
                             <h1 class="blue">Make a Payment:</h1>
                             @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @id = "pEmail", @type = "email", @required = "required" })
-                            <button class="btn btn-primary" type="submit" id="pSubmitButton">Submit</button>
+                            <button class="btn btn-purple" type="submit" id="pSubmitButton">Submit</button>
                             <button class="btn btn-default" type="button" onclick="ClearPayment();" id="pClearButton">Clear</button>
                         </div>
                     }

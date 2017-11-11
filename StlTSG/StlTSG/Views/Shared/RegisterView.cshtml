@@ -1,0 +1,29 @@
+﻿@model StlTSG.Models.RegisterViewModel
+
+<!--Register modal-->
+<div class="modal fade" id="register" role="dialog" name="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="blue bold">Register</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="container">
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @id = "rEmail", @type = "email", @required = "required" })
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @id = "rPassword", @type = "password", @required = "required" })
+                            @Html.TextBoxFor(m => m.ConfirmPassword, new { @class = "form-control", @placeholder = "Confirm password", @id = "rConfirmPassword", @type = "password", @required = "required" })
+                            @Html.TextBoxFor(m => m.Institution, new { @class = "form-control", @placeholder = "Institution", @id = "rInstitution", @required = "required" })
+                            <button type="submit" class="btn btn-primary" value="Open Form">Submit</button>
+                            <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

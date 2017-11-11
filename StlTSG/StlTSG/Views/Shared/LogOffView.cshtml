@@ -1,0 +1,13 @@
+﻿@using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" }))
+{
+    @Html.AntiForgeryToken()
+    <li>
+        @Html.ActionLink("Account", "Account", "Account")
+    </li>
+    <li>
+        @Html.ActionLink("Dashboard", "Dashboard", "Dashboard")
+    </li>
+    <li>
+        <a href="javascript:document.getElementById('logoutForm').submit()" onclick=$("#menu-close").click();>Logout</a>
+    </li>
+}

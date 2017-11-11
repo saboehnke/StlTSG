@@ -1,0 +1,27 @@
+﻿@model StlTSG.Models.LoginViewModel
+
+<!--Login modal-->
+<div class="modal fade" id="login" role="dialog" name="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="blue bold">Login</h4>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="container">
+                        <div class="col-md-3">
+                            @Html.TextBoxFor(m => m.Email, new { @class = "form-control", @placeholder = "Email", @id = "cEmail", @type = "email", @required = "required" })
+                            @Html.TextBoxFor(m => m.Password, new { @class = "form-control", @placeholder = "Password", @id = "cEmail", @type = "password", @required = "required" })
+                            @Html.ActionLink("Forgot Password?", "ForgotPassword", "Account", null, new { @class = "pad-bottom line-break" })
+                            <button type="submit" class="btn btn-primary" value="Open Form">Submit</button>
+                            <button class="btn btn-default" data-dismiss="modal">Cancel</button>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,93 @@
+﻿@model StlTSG.Models.DashboardModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Years = Enumerable.Range(2017, 100);
+    var base64 = "";
+    if (Model.ProfileImage != null)
+    {
+        base64 = Convert.ToBase64String(Model.ProfileImage);
+    }
+    else
+    {
+        string path = Server.MapPath(Url.Content("~/Images/DefaultProfile.gif"));
+        byte[] bytes = File.ReadAllBytes(path);
+        base64 = Convert.ToBase64String(bytes);
+    }
+    var profileImage = String.Format("data:image/gif;base64,{0}", base64);
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CDAR</title>
+</head>
+<body>
+    <div class="row">
+        <div class="col-md-4">
+            <div class="panel-body pad-top">
+                <img id="profile-image" class="img-responsive" src="@profileImage" />
+            </div>
+        </div>
+        <div class="col-md-7">
+            <div class="panel-body">
+                @*@Html.TextBoxFor(m => m.DateRange, new { @class = "form-control", @id = "dateRange", @placeholder = "Choose dates..." })*@
+                @Html.DropDownListFor(m => m.Year, new SelectList(ViewBag.Years as System.Collections.IEnumerable, Model.Year), "Select a year...", new { @class = "form-control btn-dropdown", @id = "yearDropdown", onchange = "ChangeChartYear()" })
+                <canvas id="lineChart"></canvas>
+            </div>
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+    @if (TempData["AccountStatusError"] != null)
+    {
+        <div class="row">
+            <div class="col-md-12">
+                <div class="alert alert-danger alert-dismissible pad-top" role="alert">
+                    @TempData["AccountStatusError"]
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+            </div>
+        </div>
+    }
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-primary filterable">
+                <div class="panel-heading">
+                    <h3 class="panel-title">Users</h3>
+                    <div class="pull-right">
+                        <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
+                        <button class="btn btn-default btn-xs btn-update"><span class="glyphicon glyphicon-refresh"></span> Update</button>
+                    </div>
+                </div>
+                <table class="table scroll">
+                    <thead>
+                        <tr class="filters">
+                            <th><input type="text" class="form-control" placeholder="ID" disabled></th>
+                            <th><input type="text" class="form-control" placeholder="Name" disabled></th>
+                            <th><input type="text" class="form-control" placeholder="Email" disabled></th>
+                            <th><input type="text" class="form-control" placeholder="Amount Owed" disabled></th>
+                        </tr>
+                    </thead>
+                    <tbody class="input-filters">
+                        @foreach (CustomerData cd in Model.CustomersData)
+                        {
+                            <tr>
+                                <td>@cd.CustomerID</td>
+                                <td>@cd.Name</td>
+                                <td>@cd.Email</td>
+                                <td><input type="text" class="form-control" id="filter-input" value="@cd.AmountOwed" onfocusout="UpdateAmountOwed(@cd.CustomerID, value)" disabled /></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        var modelData = @Html.Raw(Json.Encode(Model.MonthlyStats));
+    </script>
+</body>
+
+</html>

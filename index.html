@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>St. Louis Thermal Spray & Grinding</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;900&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --brand-blue: #0056b3;
+            --accent-cyan: #00AEEF;
+            --dark-bg: #07090B;
+            --panel-bg: #11151A;
+            --text-main: #F4F4F4;
+            --text-dim: #8B949E;
+            --border: rgba(255, 255, 255, 0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background: var(--dark-bg); 
+            color: var(--text-main); 
+            display: flex;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 { font-family: 'Oswald', sans-serif; text-transform: uppercase; line-height: 1.1; }
+
+        /* --- Fixed Sidebar Navigation --- */
+        .sidebar {
+            width: 300px;
+            background: #0B0E11;
+            border-right: 1px solid var(--border);
+            position: fixed;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 40px;
+            z-index: 1000;
+        }
+
+        .brand-logo img { width: 100%; max-width: 180px; }
+        
+        .nav-menu { display: flex; flex-direction: column; gap: 20px; margin-top: 50px; flex-grow: 1; }
+        .nav-menu a {
+            color: var(--text-dim); text-decoration: none; font-size: 0.9rem;
+            font-weight: 600; text-transform: uppercase; letter-spacing: 1px;
+            transition: 0.3s;
+            display: flex; align-items: center;
+        }
+        .nav-menu a::before { content: ""; width: 0; height: 2px; background: var(--accent-cyan); transition: 0.3s; margin-right: 0; }
+        .nav-menu a:hover { color: var(--text-main); }
+        .nav-menu a:hover::before { width: 20px; margin-right: 15px; }
+
+        .quote-btn {
+            background: var(--brand-blue); color: white; text-align: center;
+            padding: 15px; font-weight: 900; text-transform: uppercase; text-decoration: none;
+            letter-spacing: 1px; transition: 0.3s; border: 1px solid transparent;
+        }
+        .quote-btn:hover { background: transparent; border-color: var(--accent-cyan); color: var(--accent-cyan); }
+
+        /* --- Main Content Area --- */
+        .main-content {
+            margin-left: 300px;
+            width: calc(100% - 300px);
+            overflow-x: hidden;
+        }
+
+        /* --- Hero: Editorial Offset --- */
+        .hero {
+            position: relative; padding: 100px 8%; min-height: 90vh;
+            display: flex; align-items: center; justify-content: flex-end;
+        }
+        .hero-bg {
+            position: absolute; top: 0; left: 0; width: 70%; height: 100%;
+            background: linear-gradient(90deg, rgba(7,9,11,0.2) 0%, var(--dark-bg) 100%),
+                        url('https://storage.googleapis.com/production-ipage-v1-0-7/627/236627/On91HAES/c2adef82b7e049e1b40d3209e09aebbc');
+            background-size: cover; background-position: center; z-index: -1;
+            filter: grayscale(0.5) contrast(1.2);
+        }
+        .hero-text { max-width: 600px; position: relative; z-index: 2; padding-left: 50px; border-left: 4px solid var(--accent-cyan); }
+        .hero-text h1 { font-size: clamp(3.5rem, 7vw, 6.5rem); margin-bottom: 20px; }
+        .hero-text h1 span { color: var(--brand-blue); display: block; }
+        .hero-text p { font-size: 1.2rem; color: var(--text-dim); }
+
+        /* --- Expertise Section (Typography Driven) --- */
+        .expertise-section { padding: 100px 8%; background: var(--brand-blue); color: white; position: relative; }
+        .expertise-section h2 { font-size: 1.5rem; margin-bottom: 40px; opacity: 0.8; letter-spacing: 2px; }
+        .expertise-list { display: flex; flex-wrap: wrap; gap: 20px; }
+        .expertise-item {
+            font-family: 'Oswald', sans-serif; font-size: clamp(1.5rem, 3vw, 2.5rem);
+            padding: 10px 20px; border: 1px solid rgba(255,255,255,0.2);
+            text-transform: uppercase; transition: 0.3s;
+        }
+        .expertise-item:hover { background: white; color: var(--brand-blue); transform: translateY(-5px); }
+
+        /* --- Asymmetrical About Section --- */
+        .about-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 50px;
+            padding: 150px 8%; align-items: center;
+        }
+        .about-image { position: relative; }
+        .about-image img { width: 100%; display: block; box-shadow: -20px -20px 0 var(--panel-bg); }
+        .about-text h2 { font-size: 3rem; margin-bottom: 30px; color: var(--accent-cyan); }
+        .about-text p { font-size: 1.1rem; color: var(--text-dim); margin-bottom: 20px; }
+        .pull-quote {
+            font-size: 1.4rem; font-style: italic; font-weight: 300; line-height: 1.4;
+            padding: 30px; background: var(--panel-bg); border-left: 3px solid var(--accent-cyan);
+            margin: 40px 0;
+        }
+        .pull-quote span { display: block; font-size: 0.9rem; font-weight: 700; font-style: normal; margin-top: 15px; color: var(--text-main); }
+
+        /* --- Technical Services Data --- */
+        .services { padding: 100px 8%; background: #0B0E11; border-top: 1px solid var(--border); }
+        .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 60px; border-bottom: 1px solid var(--border); padding-bottom: 20px; }
+        .services-header h2 { font-size: 4rem; color: var(--text-main); opacity: 0.1; }
+        .service-row { display: grid; grid-template-columns: 1fr 2fr; gap: 40px; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .service-row h3 { color: var(--accent-cyan); font-size: 1.5rem; }
+        .service-data p { color: var(--text-dim); margin-bottom: 10px; }
+
+        /* --- Info & Visit --- */
+        .visit-section { padding: 100px 8%; display: grid; grid-template-columns: 1.5fr 1fr; gap: 60px; background: var(--panel-bg); }
+        .location-block h3 { font-size: 2rem; margin-bottom: 20px; }
+        .location-block p { font-size: 1.2rem; color: var(--text-dim); }
+        .hours-block { background: var(--dark-bg); padding: 40px; border: 1px solid var(--border); }
+        .hours-row { display: flex; justify-content: space-between; padding: 15px 0; border-bottom: 1px solid var(--panel-bg); }
+        .hours-row:last-child { border-bottom: none; }
+        .hours-row span:first-child { color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; }
+
+        /* --- Quote Request --- */
+        .quote-section { padding: 120px 8%; background: var(--brand-blue); display: flex; flex-direction: column; align-items: center; text-align: center; }
+        .quote-section h2 { font-size: 3rem; margin-bottom: 20px; }
+        .quote-form { width: 100%; max-width: 800px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; text-align: left; }
+        .full-width { grid-column: span 2; }
+        .quote-form input, .quote-form textarea {
+            width: 100%; padding: 20px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);
+            color: white; font-family: 'Inter', sans-serif; font-size: 1rem;
+        }
+        .quote-form input::placeholder, .quote-form textarea::placeholder { color: rgba(255,255,255,0.5); }
+        .submit-btn {
+            background: var(--dark-bg); color: white; padding: 20px; border: none; font-size: 1.1rem;
+            font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+        }
+        .submit-btn:hover { background: white; color: var(--brand-blue); }
+
+        @media (max-width: 1024px) {
+            body { flex-direction: column; }
+            .sidebar { width: 100%; height: auto; position: relative; flex-direction: row; align-items: center; padding: 20px 5%; border-right: none; border-bottom: 1px solid var(--border); }
+            .brand-logo img { width: 150px; }
+            .nav-menu { flex-direction: row; margin-top: 0; justify-content: center; display: none; /* Hide on mobile for simplicity, or implement a hamburger */ }
+            .main-content { margin-left: 0; width: 100%; }
+            .hero-bg { width: 100%; opacity: 0.3; }
+            .hero-text { padding-left: 20px; border-left: 2px solid var(--accent-cyan); }
+            .about-grid, .service-row, .visit-section, .quote-form { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <a href="#home" class="brand-logo">
+            <img src="https://storage.googleapis.com/production-ipage-v1-0-7/627/236627/On91HAES/f424e0daeafe4a4aa6e76d022f29e339" alt="STLTSG Logo">
+        </a>
+        <nav class="nav-menu">
+            <a href="#expertise">Expertise</a>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#visit">Location</a>
+        </nav>
+        <a href="#quote" class="quote-btn">Request a Quote</a>
+    </aside>
+
+    <main class="main-content">
+        
+        <header class="hero" id="home">
+            <div class="hero-bg"></div>
+            <div class="hero-text">
+                <h1>PRECISION <span>ENGINEERED.</span></h1>
+                <p>Over 65 years of specialized expertise in Thermal Spray Repair and high-tolerance component restoration.</p>
+            </div>
+        </header>
+
+        <section class="expertise-section" id="expertise">
+            <h2>Core Expertise Focus</h2>
+            <div class="expertise-list">
+                <div class="expertise-item">HVOF Application & Coating Design</div>
+                <div class="expertise-item">Wire Spray</div>
+                <div class="expertise-item">Ceramic Coating</div>
+                <div class="expertise-item">ID Grinding</div>
+                <div class="expertise-item">Cylindrical Grinding</div>
+                <div class="expertise-item">Surface Grinding</div>
+            </div>
+        </section>
+
+        <section class="about-grid" id="about">
+            <div class="about-text">
+                <h2>The Standard of Quality</h2>
+                <p>St. Louis Thermal Spray & Grinding is comprised of experienced individuals who have perfected the Thermal Spray and Grinding industry. Our team has over 65 years of experience in quality craftsmanship in Thermal Spray Repair.</p>
+                
+                <div class="pull-quote">
+                    "We value honesty and integrity and take great pride in providing our customers with the very best quality and turn times."
+                    <span>— DUANE BOEHNKE, OWNER</span>
+                </div>
+                
+                <p>STLTSG is focused on one thing: <strong>repairing your components.</strong> We have repaired some of the most challenging damage and understand that when your equipment is down, it is of the utmost importance to repair the component quickly, with the best quality. Our team will ensure the component performs as well or better than OEM.</p>
+            </div>
+            <div class="about-image">
+                <img src="https://storage.googleapis.com/wzukusers/user-34565261/images/5c8d59be05068AZ7MGXE/booth_d1000.jpg" alt="Production Facility">
+            </div>
+        </section>
+
+        <section class="services" id="services">
+            <div class="services-header">
+                <h2>SERVICES</h2>
+            </div>
+            
+            <div class="service-row">
+                <h3>Alloys & Materials</h3>
+                <div class="service-data">
+                    <p><strong>Tungsten Carbide:</strong> WC 88/12, 83/17, 86/10/4</p>
+                    <p><strong>Nickel Based:</strong> 90/10 Ni</p>
+                    <p><strong>Stellite:</strong> Stellite 6, Stellite 12, Stellite 21</p>
+                    <p><strong>Chrome Carbide:</strong> CRC 75/25, 80/20</p>
+                </div>
+            </div>
+
+            <div class="service-row">
+                <h3>Combustion Delivery</h3>
+                <div class="service-data">
+                    <p>Wire / Powder Systems</p>
+                    <p>Chrome Oxide</p>
+                    <p>Aluminum Oxide</p>
+                </div>
+            </div>
+
+            <div class="service-row">
+                <h3>Finishing</h3>
+                <div class="service-data">
+                    <p>Cylindrical Grinding</p>
+                    <p>ID Grinding</p>
+                    <p>Surface Grinding</p>
+                    <p>Machining</p>
+                    <p>Polishing</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="visit-section" id="visit">
+            <div class="location-block">
+                <h3>Facility Location</h3>
+                <p>10 Central Industrial Dr.<br>Suite 3<br>Granite City, Illinois 62040</p>
+                <img src="https://storage.googleapis.com/wzukusers/user-34565261/images/5c8d57e958133TcrakVq/blower.jpg" style="width: 100%; max-width: 400px; margin-top: 30px; border: 1px solid var(--border);" alt="Finished Component">
+            </div>
+            <div class="hours-block">
+                <h3 style="color: var(--accent-cyan); margin-bottom: 30px;">Hours of Operation</h3>
+                <div class="hours-row">
+                    <span>Shop Hours</span>
+                    <span>6:30 am - 3:00 pm</span>
+                </div>
+                <div class="hours-row">
+                    <span>Shipping Hours</span>
+                    <span>7:00 am - 3:00 pm</span>
+                </div>
+                <div class="hours-row">
+                    <span>Office Hours</span>
+                    <span>7:00 am - 3:00 pm</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="quote-section" id="quote">
+            <h2>REQUEST A QUOTE</h2>
+            <p style="opacity: 0.8;">Minimize downtime. Submit your component details for an expedited quote.</p>
+            <form class="quote-form">
+                <input type="text" placeholder="Full Name">
+                <input type="email" placeholder="Email Address">
+                <input type="text" placeholder="Company Name" class="full-width">
+                <textarea placeholder="Describe the component, damage, or required coating..." rows="6" class="full-width"></textarea>
+                <button type="button" class="submit-btn full-width">Request a Quote</button>
+            </form>
+        </section>
+
+    </main>
+</body>
+</html>

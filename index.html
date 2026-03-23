@@ -129,21 +129,40 @@
         .hours-row:last-child { border-bottom: none; }
         .hours-row span:first-child { color: var(--accent-cyan); font-weight: 600; text-transform: uppercase; font-size: 0.8rem; }
 
-        /* --- Quote Request --- */
-        .quote-section { padding: 120px 8%; background: var(--brand-blue); display: flex; flex-direction: column; align-items: center; text-align: center; }
-        .quote-section h2 { font-size: 3rem; margin-bottom: 20px; }
-        .quote-form { width: 100%; max-width: 800px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px; text-align: left; }
-        .full-width { grid-column: span 2; }
-        .quote-form input, .quote-form textarea {
-            width: 100%; padding: 20px; background: rgba(0,0,0,0.2); border: 1px solid rgba(255,255,255,0.1);
-            color: white; font-family: 'Inter', sans-serif; font-size: 1rem;
+        /* --- Quote / Contact --- */
+        .quote-section {
+            padding: 140px 8%; background: var(--dark-bg);
+            display: flex; flex-direction: column; align-items: flex-start;
+            border-top: 1px solid var(--border); position: relative; overflow: hidden;
         }
-        .quote-form input::placeholder, .quote-form textarea::placeholder { color: rgba(255,255,255,0.5); }
-        .submit-btn {
-            background: var(--dark-bg); color: white; padding: 20px; border: none; font-size: 1.1rem;
-            font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.3s;
+
+        .quote-section .section-label {
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 4px;
+            text-transform: uppercase; color: var(--accent-cyan); margin-bottom: 20px;
         }
-        .submit-btn:hover { background: white; color: var(--brand-blue); }
+        .quote-section h2 {
+            font-size: clamp(2.5rem, 5vw, 4rem); margin-bottom: 70px;
+            color: var(--text-main);
+        }
+        .contact-stack { display: flex; flex-direction: column; gap: 0; width: 100%; max-width: 800px; position: relative; z-index: 1; }
+        .contact-item {
+            display: grid; grid-template-columns: 160px 1fr; align-items: center;
+            padding: 35px 0; border-bottom: 1px solid var(--border);
+            transition: 0.4s;
+        }
+        .contact-item:first-child { border-top: 1px solid var(--border); }
+        .contact-item:hover { padding-left: 20px; border-color: var(--accent-cyan); }
+        .contact-item .label {
+            font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+            letter-spacing: 2px; color: var(--text-dim);
+        }
+        .contact-item .value {
+            font-family: 'Oswald', sans-serif; font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 500; color: var(--text-main); text-decoration: none;
+            letter-spacing: 0.02em; transition: 0.3s;
+        }
+        .contact-item a.value:hover { color: var(--accent-cyan); }
+        .contact-item .value .accent { color: var(--accent-cyan); }
 
         @media (max-width: 1024px) {
             body { flex-direction: column; }
@@ -272,15 +291,22 @@
         </section>
 
         <section class="quote-section" id="quote">
+            <div class="section-label">Get In Touch</div>
             <h2>REQUEST A QUOTE</h2>
-            <p style="opacity: 0.8;">Minimize downtime. Submit your component details for an expedited quote.</p>
-            <form class="quote-form">
-                <input type="text" placeholder="Full Name">
-                <input type="email" placeholder="Email Address">
-                <input type="text" placeholder="Company Name" class="full-width">
-                <textarea placeholder="Describe the component, damage, or required coating..." rows="6" class="full-width"></textarea>
-                <button type="button" class="submit-btn full-width">Request a Quote</button>
-            </form>
+            <div class="contact-stack">
+                <div class="contact-item">
+                    <span class="label">Contact</span>
+                    <span class="value">Duane V. Boehnke</span>
+                </div>
+                <div class="contact-item">
+                    <span class="label">Phone</span>
+                    <a href="tel:3147803955" class="value"><span class="accent">314</span>-780-3955</a>
+                </div>
+                <div class="contact-item">
+                    <span class="label">Email</span>
+                    <a href="mailto:dboehnke@stltsg.com" class="value">dboehnke@stltsg.com</a>
+                </div>
+            </div>
         </section>
 
     </main>
